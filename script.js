@@ -1,0 +1,93 @@
+const players = [
+    { role: '職位 1', name: '[DX] MGK', shift: 'morning' },
+    { role: '職位 2', name: 'Player 2', shift: 'afternoon' },
+    { role: '職位 3', name: '[DX] 123', shift: 'evening' },
+    { role: '職位 4', name: 'Player 4', shift: 'evening' },
+    { role: '職位 5', name: 'Player 5', shift: 'night' },
+    { role: '職位 7', name: 'Player 7', shift: 'midnight' },
+    { role: '職位 8', name: 'Player 8', shift: 'morning' },
+    { role: '職位 9', name: 'Player 9', shift: 'midnight' }
+];
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("data.txt")
+        .then(response => response.text())
+        .then(text => processText(text))
+        .catch(error => console.error("Error loading file:", error));
+});
+
+function processText(text) {
+    const lines = text.split('\n');
+    let currentSender = null;
+    let currentAmount = 0;
+
+    players.forEach(player => player.total = 0);
+
+    lines.forEach(line => {
+        line = line.trim();
+
+        if (line.startsWith("發出:")) {
+            currentSender = line.replace("發出: ", "").trim();
+        }
+
+        if (line.startsWith("數量:") && currentSender) {
+            currentAmount = parseInt(line.replace("數量:", "").trim(), 10) || 0;
+
+            players.forEach(player => {
+                if (player.name === currentSender) {
+                    player.total += currentAmount;
+                }
+            });
+
+            currentSender = null;
+        }
+    });
+
+    updateTable();
+}
+
+function updateTable() {
+    const shifts = {
+        "morning": "🌅 早班 (6:00 AM - 12:00 PM)",
+        "afternoon": "☀️ 午班 (12:00 PM - 6:00 PM)",
+        "evening": "🌆 晚班 (6:00 PM - 9:00 PM)",
+        "night": "🌙 小夜班 (9:00 PM - 12:00 AM)",
+        "midnight": "🌌 大夜班 (12:00 AM - 6:00 AM)"
+    };
+
+    const shiftSections = document.getElementById("shiftSections");
+    shiftSections.innerHTML = "";
+
+    Object.keys(shifts).forEach(shift => {
+        const shiftPlayers = players.filter(player => player.shift === shift);
+
+        if (shiftPlayers.length > 0) {
+            let tableHTML = `
+                <div class="shift-section">
+                    <h3>${shifts[shift]}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>職位</th>
+                                <th>姓名</th>
+                                <th>總數量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            shiftPlayers.forEach(player => {
+                tableHTML += `
+                    <tr>
+                        <td>${player.role}</td>
+                        <td>${player.name}</td>
+                        <td>${player.total}</td>
+                    </tr>
+                `;
+            });
+
+            tableHTML += `</tbody></table></div>`;
+            shiftSections.innerHTML += tableHTML;
+        }
+    });
+}
