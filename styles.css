@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    text-align: center;
+}
+
+.shift-section {
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 1px solid #007BFF;
+    background-color: #f9f9f9;
+}
+
+.shift-section h3 {
+    margin: 0;
+    text-align: center;
+    background-color: black;
+    color: grey;
+    padding: 10px;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #007BFF;
+    color: white;
+}
