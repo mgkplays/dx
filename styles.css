@@ -1,42 +1,92 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #d9e7ff, #ffffff);
+    color: #333;
 }
 
+/* Title */
 h2 {
     text-align: center;
+    color: #004085;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
+/* Shift Section */
 .shift-section {
-    margin-bottom: 30px;
-    padding: 10px;
-    border: 1px solid #007BFF;
-    background-color: #f9f9f9;
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
+.shift-section:hover {
+    transform: translateY(-5px);
+}
+
+/* Section Headers */
 .shift-section h3 {
     margin: 0;
     text-align: center;
-    background-color: black;
-    color: grey;
-    padding: 10px;
+    background: #004085;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
 }
 
+/* Table Styles */
 table {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 10px;
     background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-}
-
+/* Table Headers */
 th {
     background: #007BFF;
     color: white;
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* Table Cells */
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* Zebra Stripes */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover Effect */
+tr:hover {
+    background-color: #e0ecff;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .shift-section {
+        width: 95%;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
 }
