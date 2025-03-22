@@ -1,69 +1,113 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>材料計算機</title>
+    <title>Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            height: 100vh;
             margin: 0;
         }
         .sidebar {
             width: 200px;
-            background: #333;
+            background: #2c3e50;
             color: white;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
+            height: 100vh;
         }
-        .sidebar a {
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            background: #1abc9c;
+            border: none;
             color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin: 5px 0;
-            background: #444;
-            text-align: center;
-            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
         }
-        .sidebar a:hover {
-            background: #555;
-        }
-        .content {
+        .main {
             flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            padding: 20px;
         }
-        input, button {
-            padding: 10px;
-            margin: 5px;
-            font-size: 16px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #16a085;
+            color: white;
+        }
+        input {
+            width: 60px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <a href="calculator.html">材料計算機</a>
+        <button onclick="toggleCalculator()">Calculator</button>
     </div>
-    <div class="content">
-        <h2>簡單材料計算機</h2>
-        <label>修車包數量: <input type="number" id="repair" value="0"></label>
-        <label>氣氛瓶數量: <input type="number" id="gas" value="0"></label>
-        <label>全新輪胎數量: <input type="number" id="tire" value="0"></label>
-        <button onclick="calculate()">計算總價</button>
-        <h3 id="total">總價: 0</h3>
+    <div class="main" id="calculator" style="display: none;">
+        <h2>Calculator</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="calcBody">
+                <tr>
+                    <td>Repair Kit</td>
+                    <td>11000</td>
+                    <td><input type="number" value="0" oninput="calculateTotal(this)"></td>
+                    <td class="total">0</td>
+                </tr>
+                <tr>
+                    <td>Oxygen Bottle</td>
+                    <td>5000</td>
+                    <td><input type="number" value="0" oninput="calculateTotal(this)"></td>
+                    <td class="total">0</td>
+                </tr>
+                <tr>
+                    <td>New Tire</td>
+                    <td>1000</td>
+                    <td><input type="number" value="0" oninput="calculateTotal(this)"></td>
+                    <td class="total">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total: <span id="grandTotal">0</span></h3>
     </div>
+    
     <script>
-        function calculate() {
-            let repair = document.getElementById('repair').value * 11000;
-            let gas = document.getElementById('gas').value * 5000;
-            let tire = document.getElementById('tire').value * 1000;
-            let total = repair + gas + tire;
-            document.getElementById('total').innerText = "總價: " + total.toLocaleString() + " 元";
+        function toggleCalculator() {
+            const calc = document.getElementById("calculator");
+            calc.style.display = calc.style.display === "none" ? "block" : "none";
+        }
+        
+        function calculateTotal(input) {
+            const row = input.closest("tr");
+            const price = parseInt(row.children[1].innerText, 10);
+            const amount = parseInt(input.value, 10) || 0;
+            row.children[3].innerText = price * amount;
+            updateGrandTotal();
+        }
+        
+        function updateGrandTotal() {
+            let total = 0;
+            document.querySelectorAll(".total").forEach(td => {
+                total += parseInt(td.innerText, 10) || 0;
+            });
+            document.getElementById("grandTotal").innerText = total;
         }
     </script>
 </body>
