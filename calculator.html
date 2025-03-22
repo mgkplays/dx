@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>材料計算機</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 5px 0;
+            background: #444;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background: #555;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="calculator.html">材料計算機</a>
+    </div>
+    <div class="content">
+        <h2>簡單材料計算機</h2>
+        <label>修車包數量: <input type="number" id="repair" value="0"></label>
+        <label>氣氛瓶數量: <input type="number" id="gas" value="0"></label>
+        <label>全新輪胎數量: <input type="number" id="tire" value="0"></label>
+        <button onclick="calculate()">計算總價</button>
+        <h3 id="total">總價: 0</h3>
+    </div>
+    <script>
+        function calculate() {
+            let repair = document.getElementById('repair').value * 11000;
+            let gas = document.getElementById('gas').value * 5000;
+            let tire = document.getElementById('tire').value * 1000;
+            let total = repair + gas + tire;
+            document.getElementById('total').innerText = "總價: " + total.toLocaleString() + " 元";
+        }
+    </script>
+</body>
+</html>
