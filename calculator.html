@@ -55,19 +55,19 @@
         <h2>Calculator</h2>
         <h3>Items</h3>
         <table>
-            <tr><th>Medicine</th><th>Price</th><th>Amount</th><th>Total</th></tr>
-            <tr><td>5M 繃帶</td><td>6000</td><td><input type="number" id="item1" value="0" onchange="calculate()"></td><td id="total1">0</td></tr>
-            <tr><td>5M 大繃帶</td><td>30000</td><td><input type="number" id="item2" value="0" onchange="calculate()"></td><td id="total2">0</td></tr>
-            <tr><td>疫苗</td><td>12000</td><td><input type="number" id="item3" value="0" onchange="calculate()"></td><td id="total3">0</td></tr>
+            <tr><th>MATERIAL</th><th>Price</th><th>Amount</th><th>Total</th></tr>
+            <tr><td>修車包</td><td>11000</td><td><input type="number" id="item1" value="0" onchange="calculate()"></td><td id="total1">0</td></tr>
+            <tr><td>輪胎</td><td>1000</td><td><input type="number" id="item2" value="0" onchange="calculate()"></td><td id="total2">0</td></tr>
+            <tr><td>氮氣瓶</td><td>5000</td><td><input type="number" id="item3" value="0" onchange="calculate()"></td><td id="total3">0</td></tr>
             <tr><td colspan="3"><b>Total</b></td><td id="grandTotal">0</td></tr>
         </table>
         
         <h3>材料收購 (Material Purchase)</h3>
         <table>
             <tr><th>Material</th><th>Price</th><th>Amount</th><th>Total</th></tr>
-            <tr><td>鐵礦</td><td>60000</td><td><input type="number" id="mat1" value="0" onchange="calculate()"></td><td id="matTotal1">0</td></tr>
-            <tr><td>鉛礦</td><td>30000</td><td><input type="number" id="mat2" value="0" onchange="calculate()"></td><td id="matTotal2">0</td></tr>
-            <tr><td>高級金屬</td><td>39000</td><td><input type="number" id="mat3" value="0" onchange="calculate()"></td><td id="matTotal3">0</td></tr>
+            <tr><td>鐵礦</td><td>200</td><td><input type="number" id="mat1" value="0" onchange="calculate()"></td><td id="matTotal1">0</td></tr>
+            <tr><td>鈦礦</td><td>100</td><td><input type="number" id="mat2" value="0" onchange="calculate()"></td><td id="matTotal2">0</td></tr>
+            <tr><td>高級金屬</td><td>650</td><td><input type="number" id="mat3" value="0" onchange="calculate()"></td><td id="matTotal3">0</td></tr>
             <tr><td colspan="3"><b>Total</b></td><td id="matGrandTotal">0</td></tr>
         </table>
     </div>
@@ -78,18 +78,18 @@
         }
 
         function calculate() {
-            let item1 = document.getElementById('item1').value * 6000;
-            let item2 = document.getElementById('item2').value * 30000;
-            let item3 = document.getElementById('item3').value * 12000;
+            let item1 = document.getElementById('item1').value * 11000;
+            let item2 = document.getElementById('item2').value * 1000;
+            let item3 = document.getElementById('item3').value * 5000;
             
             document.getElementById('total1').innerText = item1;
             document.getElementById('total2').innerText = item2;
             document.getElementById('total3').innerText = item3;
             document.getElementById('grandTotal').innerText = item1 + item2 + item3;
 
-            let mat1 = document.getElementById('mat1').value * 60000;
-            let mat2 = document.getElementById('mat2').value * 30000;
-            let mat3 = document.getElementById('mat3').value * 39000;
+            let mat1 = document.getElementById('mat1').value * 200;
+            let mat2 = document.getElementById('mat2').value * 100;
+            let mat3 = document.getElementById('mat3').value * 650;
             
             document.getElementById('matTotal1').innerText = mat1;
             document.getElementById('matTotal2').innerText = mat2;
