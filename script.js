@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(text => processText(text))
         .catch(error => console.error("Error loading file:", error));
-
-    setupSidebar();
 });
 
 function processText(text) {
@@ -43,7 +41,7 @@ function processText(text) {
 
         if (line.startsWith("數量:") && currentSender && currentTime) {
             currentAmount = parseInt(line.replace("數量:", "").trim(), 10) || 0;
-            const currentHour = parseInt(currentTime.split(":")[0], 10);
+            const currentHour = parseInt(currentTime.split(":" )[0], 10);
             
             players.forEach(player => {
                 if (player.name === currentSender) {
@@ -62,6 +60,7 @@ function processText(text) {
     });
 
     updateTable();
+    updateMaterialsTable();
 }
 
 function isWithinShift(hour, shift) {
@@ -129,15 +128,44 @@ function updateTable() {
     });
 }
 
-function setupSidebar() {
-    const sidebar = document.createElement("div");
-    sidebar.id = "sidebar";
-    sidebar.innerHTML = `
-        <button onclick="openCalculator()">🧮 計算機</button>
+function updateMaterialsTable() {
+    const materials = [
+        { name: "鐵礦", price: 60000, amount: 0 },
+        { name: "鉛礦", price: 30000, amount: 0 },
+        { name: "高級金屬", price: 39000, amount: 0 }
+    ];
+
+    let tableHTML = `
+        <h3>材料收購</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>材料</th>
+                    <th>單價</th>
+                    <th>數量</th>
+                    <th>總計</th>
+                </tr>
+            </thead>
+            <tbody>
     `;
-    document.body.appendChild(sidebar);
+
+    materials.forEach(material => {
+        tableHTML += `
+            <tr>
+                <td>${material.name}</td>
+                <td>${material.price}</td>
+                <td><input type="number" value="${material.amount}" min="0" onchange="calculateTotal(this, ${material.price})"></td>
+                <td id="total-${material.name}">${material.amount * material.price}</td>
+            </tr>
+        `;
+    });
+
+    tableHTML += `</tbody></table>`;
+    document.getElementById("materialsSection").innerHTML = tableHTML;
 }
 
-function openCalculator() {
-    window.location.href = "calculator.html";
+function calculateTotal(input, price) {
+    const amount = parseInt(input.value, 10) || 0;
+    const totalCell = input.parentElement.nextElementSibling;
+    totalCell.textContent = amount * price;
 }
