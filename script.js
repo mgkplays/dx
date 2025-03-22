@@ -1,12 +1,12 @@
 const players = [
-    { role: '職位 1', name: '[DX] MGK', shift: 'morning' },
-    { role: '職位 2', name: 'Player 2', shift: 'afternoon' },
-    { role: '職位 3', name: '[DX] 123', shift: 'evening' },
-    { role: '職位 4', name: 'Player 4', shift: 'evening' },
-    { role: '職位 5', name: 'Player 5', shift: 'night' },
-    { role: '職位 7', name: 'Player 7', shift: 'midnight' },
-    { role: '職位 8', name: 'Player 8', shift: 'morning' },
-    { role: '職位 9', name: 'Player 9', shift: 'midnight' }
+    { role: '職位 1', steam16: '1234567890123456', name: '[DX] MGK', shift: 'morning' },
+    { role: '職位 2', steam16: '1234567890123456', name: 'Player 2', shift: 'afternoon' },
+    { role: '職位 3', steam16: '1234567890123456', name: '[DX] 123', shift: 'evening' },
+    { role: '職位 4', steam16: '1234567890123456', name: 'Player 4', shift: 'evening' },
+    { role: '職位 5', steam16: '1234567890123456', name: 'Player 5', shift: 'night' },
+    { role: '職位 7', steam16: '1234567890123456', name: 'Player 7', shift: 'midnight' },
+    { role: '職位 8', steam16: '1234567890123456', name: 'Player 8', shift: 'morning' },
+    { role: '職位 9', steam16: '1234567890123456', name: 'Player 9', shift: 'midnight' }
 ];
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -69,6 +69,7 @@ function updateTable() {
                         <thead>
                             <tr>
                                 <th>職位</th>
+                                <th>Steam16</th>
                                 <th>姓名</th>
                                 <th>總數量</th>
                             </tr>
@@ -80,6 +81,7 @@ function updateTable() {
                 tableHTML += `
                     <tr>
                         <td>${player.role}</td>
+                        <td>${player.steam16}</td>
                         <td>${player.name}</td>
                         <td>${player.total}</td>
                     </tr>
