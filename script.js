@@ -21,7 +21,11 @@ function processText(text) {
     let currentSender = null;
     let currentAmount = 0;
 
-    players.forEach(player => player.total = 0);
+    players.forEach(player => {
+        player.total = 0;
+        player.workingTimeTotal = 0;
+        player.nonWorkingTimeTotal = 0;
+    });
 
     lines.forEach(line => {
         line = line.trim();
@@ -32,10 +36,16 @@ function processText(text) {
 
         if (line.startsWith("數量:") && currentSender) {
             currentAmount = parseInt(line.replace("數量:", "").trim(), 10) || 0;
-
+            const currentHour = new Date().getHours();
+            
             players.forEach(player => {
                 if (player.name === currentSender) {
                     player.total += currentAmount;
+                    if (isWithinShift(currentHour, player.shift)) {
+                        player.workingTimeTotal += currentAmount;
+                    } else {
+                        player.nonWorkingTimeTotal += currentAmount;
+                    }
                 }
             });
 
@@ -44,6 +54,19 @@ function processText(text) {
     });
 
     updateTable();
+}
+
+function isWithinShift(hour, shift) {
+    const shiftHours = {
+        "morning": [6, 12],
+        "afternoon": [12, 18],
+        "evening": [18, 21],
+        "night": [21, 24],
+        "midnight": [0, 6]
+    };
+    
+    const [start, end] = shiftHours[shift];
+    return hour >= start && hour < end;
 }
 
 function updateTable() {
@@ -71,6 +94,8 @@ function updateTable() {
                                 <th>職位</th>
                                 <th>Steam16</th>
                                 <th>姓名</th>
+                                <th>上班單數</th>
+                                <th>非上班單數</th>
                                 <th>總數量</th>
                             </tr>
                         </thead>
@@ -83,6 +108,8 @@ function updateTable() {
                         <td>${player.role}</td>
                         <td>${player.steam16}</td>
                         <td>${player.name}</td>
+                        <td>${player.workingTimeTotal}</td>
+                        <td>${player.nonWorkingTimeTotal}</td>
                         <td>${player.total}</td>
                     </tr>
                 `;
