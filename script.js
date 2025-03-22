@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(text => processText(text))
         .catch(error => console.error("Error loading file:", error));
+
+    setupSidebar();
 });
 
 function processText(text) {
@@ -125,4 +127,17 @@ function updateTable() {
             shiftSections.innerHTML += tableHTML;
         }
     });
+}
+
+function setupSidebar() {
+    const sidebar = document.createElement("div");
+    sidebar.id = "sidebar";
+    sidebar.innerHTML = `
+        <button onclick="openCalculator()">🧮 計算機</button>
+    `;
+    document.body.appendChild(sidebar);
+}
+
+function openCalculator() {
+    window.location.href = "calculator.html";
 }
