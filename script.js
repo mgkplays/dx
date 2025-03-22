@@ -20,6 +20,7 @@ function processText(text) {
     const lines = text.split('\n');
     let currentSender = null;
     let currentAmount = 0;
+    let currentTime = null;
 
     players.forEach(player => {
         player.total = 0;
@@ -30,13 +31,17 @@ function processText(text) {
     lines.forEach(line => {
         line = line.trim();
 
-        if (line.startsWith("發出:")) {
-            currentSender = line.replace("發出: ", "").trim();
+        if (line.startsWith("時間:")) {
+            currentTime = line.replace("時間:", "").trim();
         }
 
-        if (line.startsWith("數量:") && currentSender) {
+        if (line.startsWith("發出:")) {
+            currentSender = line.replace("發出:", "").trim();
+        }
+
+        if (line.startsWith("數量:") && currentSender && currentTime) {
             currentAmount = parseInt(line.replace("數量:", "").trim(), 10) || 0;
-            const currentHour = new Date().getHours();
+            const currentHour = parseInt(currentTime.split(":")[0], 10);
             
             players.forEach(player => {
                 if (player.name === currentSender) {
@@ -50,6 +55,7 @@ function processText(text) {
             });
 
             currentSender = null;
+            currentTime = null;
         }
     });
 
