@@ -8,9 +8,34 @@
 </head>
 <body>
 
-    <h2>宮田自動車整備所</h2>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <h3>選擇功能</h3>
+        <ul>
+            <li><a href="#" onclick="showSection('shiftData')">單數資料</a></li>
+            <li><a href="#" onclick="showSection('calculator')">計算機</a></li>
+            <li><a href="#" onclick="showSection('announcements')">公告複貼</a></li>
+        </ul>
+    </div>
 
-    <div id="shiftSections"></div>
+    <!-- Main Content -->
+    <div id="mainContent">
+        <h2>宮田自動車整備所</h2>
+        <div id="shiftSections"></div>
+        
+        <!-- Additional Sections -->
+        <div id="calculator" class="hidden">
+            <h3>計算機</h3>
+            <p>這裡是計算機功能。</p>
+            <!-- Add your calculator functionality here -->
+        </div>
+
+        <div id="announcements" class="hidden">
+            <h3>公告複貼</h3>
+            <p>這裡是公告複貼功能。</p>
+            <!-- Add your announcement content here -->
+        </div>
+    </div>
 
     <!-- Credits Section -->
     <footer style="text-align: center; margin-top: 40px; font-family: 'Arial', sans-serif; color: #ffcc00;">
