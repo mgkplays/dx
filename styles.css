@@ -3,8 +3,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    color: #333;
+    background: linear-gradient(135deg, #263238, #37474f);
+    color: #eceff1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,10 +13,12 @@ body {
 /* Title */
 h2 {
     text-align: center;
-    color: #01579b;
-    font-size: 30px;
+    color: #ffcc00;
+    font-size: 32px;
     margin-bottom: 20px;
     font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Shift Section */
@@ -26,9 +28,10 @@ h2 {
     margin: 20px auto;
     padding: 20px;
     border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: #424242;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease-in-out;
+    border-left: 6px solid #ffcc00;
 }
 
 .shift-section:hover {
@@ -39,12 +42,13 @@ h2 {
 .shift-section h3 {
     margin: 0;
     text-align: center;
-    background: #0288d1;
-    color: white;
+    background: #ffcc00;
+    color: #212121;
     padding: 14px;
     border-radius: 8px;
     font-size: 20px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 /* Table Styles */
@@ -52,37 +56,39 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    background: white;
+    background: #616161;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Table Headers */
 th {
-    background: #039be5;
-    color: white;
+    background: #ffcc00;
+    color: #212121;
     padding: 14px;
     font-size: 16px;
+    text-transform: uppercase;
 }
 
 /* Table Cells */
 td {
     padding: 12px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #757575;
     font-size: 15px;
     transition: background 0.3s;
+    color: #eceff1;
 }
 
 /* Zebra Stripes */
 tr:nth-child(even) {
-    background-color: #f1f8fe;
+    background-color: #546e7a;
 }
 
 /* Hover Effect */
 tr:hover {
-    background-color: #bbdefb;
+    background-color: #78909c;
     cursor: pointer;
 }
 
@@ -100,16 +106,32 @@ tr:hover {
 
 /* Button Styles */
 button {
-    background: #0288d1;
-    color: white;
-    padding: 10px 20px;
+    background: #ffcc00;
+    color: #212121;
+    padding: 12px 24px;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 button:hover {
-    background: #0277bd;
+    background: #ffeb3b;
+}
+
+/* Mechanic Theme Elements */
+.shift-section::before {
+    content: '\1F527'; /* Wrench emoji */
+    font-size: 24px;
+    position: absolute;
+    margin-left: -30px;
+}
+
+tr td:first-child {
+    font-weight: bold;
+    text-transform: uppercase;
 }
