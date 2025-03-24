@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.text())
         .then(text => processText(text))
         .catch(error => console.error("Error loading file:", error));
+
+    // Initially show the 'shiftData' section
+    showSection('shiftData');
 });
 
 function processText(text) {
@@ -22,6 +25,7 @@ function processText(text) {
     let currentAmount = 0;
     let currentTime = null;
 
+    // Initialize totals for each player
     players.forEach(player => {
         player.total = 0;
         player.workingTimeTotal = 0;
@@ -41,8 +45,9 @@ function processText(text) {
 
         if (line.startsWith("數量:") && currentSender && currentTime) {
             currentAmount = parseInt(line.replace("數量:", "").trim(), 10) || 0;
-            const currentHour = parseInt(currentTime.split(":" )[0], 10);
+            const currentHour = parseInt(currentTime.split(":")[0], 10);
             
+            // Update player totals based on their shift
             players.forEach(player => {
                 if (player.name === currentSender) {
                     player.total += currentAmount;
@@ -54,11 +59,13 @@ function processText(text) {
                 }
             });
 
+            // Reset for next line
             currentSender = null;
             currentTime = null;
         }
     });
 
+    // Update the UI with processed data
     updateTable();
     updateMaterialsTable();
 }
@@ -71,7 +78,7 @@ function isWithinShift(hour, shift) {
         "night": [21, 24],
         "midnight": [0, 6]
     };
-    
+
     const [start, end] = shiftHours[shift];
     return hour >= start && hour < end;
 }
@@ -88,6 +95,7 @@ function updateTable() {
     const shiftSections = document.getElementById("shiftSections");
     shiftSections.innerHTML = "";
 
+    // Generate tables for each shift
     Object.keys(shifts).forEach(shift => {
         const shiftPlayers = players.filter(player => player.shift === shift);
 
@@ -154,7 +162,7 @@ function updateMaterialsTable() {
             <tr>
                 <td>${material.name}</td>
                 <td>${material.price}</td>
-                <td><input type="number" value="${material.amount}" min="0" onchange="calculateTotal(this, ${material.price})"></td>
+                <td><input type="number" value="${material.amount}" min="0" onchange="calculateTotal(this, ${material.price}, '${material.name}')"></td>
                 <td id="total-${material.name}">${material.amount * material.price}</td>
             </tr>
         `;
@@ -164,8 +172,19 @@ function updateMaterialsTable() {
     document.getElementById("materialsSection").innerHTML = tableHTML;
 }
 
-function calculateTotal(input, price) {
+function calculateTotal(input, price, materialName) {
     const amount = parseInt(input.value, 10) || 0;
-    const totalCell = input.parentElement.nextElementSibling;
+    const totalCell = document.getElementById(`total-${materialName}`);
     totalCell.textContent = amount * price;
+}
+
+function showSection(section) {
+    // Hide all sections first
+    const sections = ['shiftData', 'calculator', 'announcements'];
+    sections.forEach(s => {
+        document.getElementById(s).classList.add('hidden');
+    });
+
+    // Show the selected section
+    document.getElementById(section).classList.remove('hidden');
 }
