@@ -75,15 +75,21 @@ h2, h3 {
 
 /* Footer */
 footer {
-    width: 100%;
+    width: calc(100% - 250px); /* Makes the footer exclude the sidebar width */
+    margin-left: 250px; /* Aligns it with the main content */
     text-align: center;
     background: #212121;
     padding: 10px 0;
     margin-top: auto;
+    position: fixed; /* Keeps it at the bottom */
+    bottom: 0;
+    left: 250px; /* Ensures it doesn't go under the sidebar */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
 }
 
+/* Footer Text */
 footer p {
-    font-size: 14px; /* Reduced font size */
+    font-size: 14px;
     font-weight: bold;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     color: #ffcc00;
@@ -91,14 +97,15 @@ footer p {
 
 /* Credits Section */
 .credits {
-    font-size: 12px; /* Smaller credit text */
+    font-size: 12px;
     font-weight: normal;
-    color: #b0bec5; /* Changed color to soft gray-blue */
+    color: #b0bec5;
     display: flex;
     justify-content: center;
-    gap: 15px; /* Spacing between names */
-    flex-wrap: wrap; /* Ensures responsiveness */
+    gap: 15px;
+    flex-wrap: wrap;
 }
+
 
 /* Shift Section */
 .shift-section {
