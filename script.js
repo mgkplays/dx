@@ -182,9 +182,11 @@ function showSection(section) {
     // Hide all sections first
     const sections = ['shiftData', 'calculator', 'announcements'];
     sections.forEach(s => {
-        document.getElementById(s).classList.add('hidden');
+        const element = document.getElementById(s);
+        if (element) element.classList.add('hidden');
     });
 
     // Show the selected section
-    document.getElementById(section).classList.remove('hidden');
+    const selectedElement = document.getElementById(section);
+    if (selectedElement) selectedElement.classList.remove('hidden');
 }
