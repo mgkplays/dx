@@ -58,6 +58,7 @@ body {
     margin-left: 270px;
     padding: 20px;
     flex: 1;
+    padding-bottom: 60px; /* Avoids content hiding behind footer */
 }
 
 .hidden {
@@ -75,16 +76,15 @@ h2, h3 {
 
 /* Footer */
 footer {
-    width: calc(100% - 250px); /* Makes the footer exclude the sidebar width */
-    margin-left: 250px; /* Aligns it with the main content */
+    width: 100%; /* Full width */
     text-align: center;
     background: #212121;
     padding: 10px 0;
     margin-top: auto;
-    position: fixed; /* Keeps it at the bottom */
+    position: fixed; /* Stays at bottom */
     bottom: 0;
-    left: 250px; /* Ensures it doesn't go under the sidebar */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    left: 0; /* Ensures it starts from the left */
+    z-index: 1000; /* Keeps it above other elements */
 }
 
 /* Footer Text */
@@ -191,7 +191,7 @@ tr:hover {
     }
 
     #sidebar {
-        width: 200px;
+         z-index: 1100; /* Higher than footer */
     }
 
     #mainContent {
